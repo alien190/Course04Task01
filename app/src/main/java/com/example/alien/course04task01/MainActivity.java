@@ -17,6 +17,9 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.alien.course04task01.bulder.ImageViewBulder;
+import com.example.alien.course04task01.bulder.TextViewBuilder;
+
 public class MainActivity extends AppCompatActivity {
 
     private DisplayMetrics metrics = new DisplayMetrics();
@@ -26,20 +29,34 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         //setContentView(R.layout.activity_main);
 
-        int ivIconId = 1;
+        int ivIconId = 10000;
+        int tvTitleId = 10001;
 
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
 
         FrameLayout root = getFrameLayout(16);
         RelativeLayout relativeLayout = getRelativeLayout();
 
-        ImageView imageView = getImageView(ivIconId);
+        ImageView imageView = new ImageViewBulder()
+                .setId(ivIconId)
+                .setImageResource(R.drawable.sir_max)
+                .build(this);
 
-        TextView textView = getTextView(1, 8, 0, 0, 0,
-                8, R.string.author, 28, Typeface.BOLD);
+//        TextView textView = getTextView(1, 8, 0, 0, 0,
+//                8, R.string.author, 28, Typeface.BOLD);
+
+        TextView tvTitle = new TextViewBuilder()
+                .setTextId(tvTitleId)
+                .setMarginLeftPx(dpToPx(8))
+                .setMarginTopPx(dpToPx(8))
+                .setMarginStartPx(dpToPx(8))
+                .setTextId(R.string.author)
+                .setTextSizeSp(28)
+                .setTextStyle(Typeface.BOLD)
+                .build(this);
 
         relativeLayout.addView(imageView);
-        relativeLayout.addView(textView);
+        relativeLayout.addView(tvTitle);
         root.addView(relativeLayout);
         setContentView(root);
 
@@ -56,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
         FrameLayout.LayoutParams layoutParams =
                 new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                         ViewGroup.LayoutParams.MATCH_PARENT);
+
         layout.setLayoutParams(layoutParams);
         layout.setPadding(padding, padding, padding, padding);
 
