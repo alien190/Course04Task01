@@ -2,8 +2,9 @@ package com.example.alien.course04task01.bulder;
 
 import android.content.Context;
 import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
 
-public class FrameLayoutBuilder {
+public class RelativeLayoutBuilder {
 
     private int paddingLeftPx = 0;
     private int paddingTopPx = 0;
@@ -11,38 +12,39 @@ public class FrameLayoutBuilder {
     private int paddingBottomPx = 0;
     private int layoutWidth = -2;
     private int layoutHeight = -2;
+    private int gravity = 0;
 
-    public FrameLayoutBuilder setPaddingLeftPx(int paddingLeftPx) {
+    public RelativeLayoutBuilder setPaddingLeftPx(int paddingLeftPx) {
         this.paddingLeftPx = paddingLeftPx;
         return this;
     }
 
-    public FrameLayoutBuilder setPaddingTopPx(int paddingTopPx) {
+    public RelativeLayoutBuilder setPaddingTopPx(int paddingTopPx) {
         this.paddingTopPx = paddingTopPx;
         return this;
     }
 
-    public FrameLayoutBuilder setPaddingRightPx(int paddingRightPx) {
+    public RelativeLayoutBuilder setPaddingRightPx(int paddingRightPx) {
         this.paddingRightPx = paddingRightPx;
         return this;
     }
 
-    public FrameLayoutBuilder setPaddingBottomPx(int paddingBottomPx) {
+    public RelativeLayoutBuilder setPaddingBottomPx(int paddingBottomPx) {
         this.paddingBottomPx = paddingBottomPx;
         return this;
     }
 
-    public FrameLayoutBuilder setLayoutWidth(int layoutWidth) {
+    public RelativeLayoutBuilder setLayoutWidth(int layoutWidth) {
         this.layoutWidth = layoutWidth;
         return this;
     }
 
-    public FrameLayoutBuilder setLayoutHeight(int layoutHeight) {
+    public RelativeLayoutBuilder setLayoutHeight(int layoutHeight) {
         this.layoutHeight = layoutHeight;
         return this;
     }
 
-    public FrameLayoutBuilder setPaddingPx(int padding) {
+    public RelativeLayoutBuilder setPaddingPx(int padding) {
         paddingLeftPx = padding;
         paddingTopPx = padding;
         paddingRightPx = padding;
@@ -50,14 +52,20 @@ public class FrameLayoutBuilder {
         return this;
     }
 
-    public FrameLayout build(Context context) {
-        FrameLayout layout = new FrameLayout(context);
-        FrameLayout.LayoutParams layoutParams =
-                new FrameLayout.LayoutParams(layoutWidth,
+    public RelativeLayoutBuilder setGravity(int gravity) {
+        this.gravity = gravity;
+        return this;
+    }
+
+    public RelativeLayout build(Context context) {
+        RelativeLayout layout = new RelativeLayout(context);
+        RelativeLayout.LayoutParams layoutParams =
+                new RelativeLayout.LayoutParams(layoutWidth,
                         layoutHeight);
 
         layout.setLayoutParams(layoutParams);
         layout.setPadding(paddingLeftPx, paddingTopPx, paddingRightPx, paddingBottomPx);
+        layout.setGravity(gravity);
 
         return layout;
     }

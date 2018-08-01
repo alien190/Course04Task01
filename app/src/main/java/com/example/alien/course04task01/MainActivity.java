@@ -17,7 +17,9 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.alien.course04task01.bulder.FrameLayoutBuilder;
 import com.example.alien.course04task01.bulder.ImageViewBulder;
+import com.example.alien.course04task01.bulder.RelativeLayoutBuilder;
 import com.example.alien.course04task01.bulder.TextViewBuilder;
 
 public class MainActivity extends AppCompatActivity {
@@ -34,8 +36,15 @@ public class MainActivity extends AppCompatActivity {
 
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
 
-        FrameLayout root = getFrameLayout(16);
-        RelativeLayout relativeLayout = getRelativeLayout();
+        FrameLayout root = new FrameLayoutBuilder()
+                .setPaddingPx(dpToPx(16))
+                .setLayoutHeight(ViewGroup.LayoutParams.MATCH_PARENT)
+                .setLayoutWidth(ViewGroup.LayoutParams.MATCH_PARENT)
+                .build(this);
+
+        RelativeLayout relativeLayout = new RelativeLayoutBuilder()
+                .setGravity(Gravity.CENTER)
+                .build(this);
 
         ImageView imageView = new ImageViewBulder()
                 .setId(ivIconId)
