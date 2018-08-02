@@ -11,6 +11,7 @@ public class FrameLayoutBuilder {
     private int paddingBottomPx = 0;
     private int layoutWidth = -2;
     private int layoutHeight = -2;
+    private int gravity = 0;
 
     public FrameLayoutBuilder setPaddingLeftPx(int paddingLeftPx) {
         this.paddingLeftPx = paddingLeftPx;
@@ -50,6 +51,11 @@ public class FrameLayoutBuilder {
         return this;
     }
 
+    public FrameLayoutBuilder setGravity(int gravity) {
+        this.gravity = gravity;
+        return this;
+    }
+
     public FrameLayout build(Context context) {
         FrameLayout layout = new FrameLayout(context);
         FrameLayout.LayoutParams layoutParams =
@@ -58,6 +64,7 @@ public class FrameLayoutBuilder {
 
         layout.setLayoutParams(layoutParams);
         layout.setPadding(paddingLeftPx, paddingTopPx, paddingRightPx, paddingBottomPx);
+        layout.setForegroundGravity(gravity);
 
         return layout;
     }

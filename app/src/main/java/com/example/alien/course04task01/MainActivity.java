@@ -1,14 +1,11 @@
 package com.example.alien.course04task01;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
-import android.view.Display;
 import android.view.Gravity;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -20,6 +17,7 @@ import android.widget.TextView;
 import com.example.alien.course04task01.bulder.FrameLayoutBuilder;
 import com.example.alien.course04task01.bulder.ImageViewBulder;
 import com.example.alien.course04task01.bulder.RelativeLayoutBuilder;
+import com.example.alien.course04task01.bulder.RelativeLayoutParamsBuilder;
 import com.example.alien.course04task01.bulder.TextViewBuilder;
 
 public class MainActivity extends AppCompatActivity {
@@ -29,10 +27,18 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_main);
+//        setContentView(R.layout.activity_main);
+//
+//        TextView tvQuote = findViewById(R.id.tvQuote);
+//        RelativeLayout.LayoutParams layoutParams =
+//                (RelativeLayout.LayoutParams) tvQuote.getLayoutParams();
+//
+//        int i =1;
 
         int ivIconId = 10000;
         int tvTitleId = 10001;
+        int tvQuoteId = 10002;
+
 
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
 
@@ -40,9 +46,12 @@ public class MainActivity extends AppCompatActivity {
                 .setPaddingPx(dpToPx(16))
                 .setLayoutHeight(ViewGroup.LayoutParams.MATCH_PARENT)
                 .setLayoutWidth(ViewGroup.LayoutParams.MATCH_PARENT)
+                .setGravity(Gravity.CENTER)
                 .build(this);
 
         RelativeLayout relativeLayout = new RelativeLayoutBuilder()
+                .setLayoutHeight(ViewGroup.LayoutParams.MATCH_PARENT)
+                .setLayoutWidth(ViewGroup.LayoutParams.MATCH_PARENT)
                 .setGravity(Gravity.CENTER)
                 .build(this);
 
@@ -51,24 +60,52 @@ public class MainActivity extends AppCompatActivity {
                 .setImageResource(R.drawable.sir_max)
                 .build(this);
 
-//        TextView textView = getTextView(1, 8, 0, 0, 0,
-//                8, R.string.author, 28, Typeface.BOLD);
+
+        RelativeLayout.LayoutParams tvTitleLayoutParams = new RelativeLayoutParamsBuilder()
+                .alignTop(ivIconId)
+                .setMarginLeftPx(dpToPx(8))
+                .setMarginStartPx(dpToPx(8))
+                .toEndOf(ivIconId)
+                .toRightOf(ivIconId)
+                .build();
 
         TextView tvTitle = new TextViewBuilder()
-                .setTextId(tvTitleId)
-                .setMarginLeftPx(dpToPx(8))
-                .setMarginTopPx(dpToPx(8))
-                .setMarginStartPx(dpToPx(8))
+                .setId(tvTitleId)
                 .setTextId(R.string.author)
                 .setTextSizeSp(28)
                 .setTextStyle(Typeface.BOLD)
+                .setLayoutParams(tvTitleLayoutParams)
+                .build(this);
+
+
+        RelativeLayout.LayoutParams tvQuoteLayoutParams = new RelativeLayoutParamsBuilder()
+                .alignBottom(ivIconId)
+                .alignLeft(tvTitleId)
+                .alignStart(tvTitleId)
+                .below(tvTitleId)
+                .setMarginTopPx(dpToPx(8))
+                .build();
+
+        TextView tvQuote = new TextViewBuilder()
+                .setId(tvQuoteId)
+                .setTextId(R.string.quote)
+                .setTextSizeSp(14)
+                .setTextStyle(Typeface.ITALIC)
+                .setLayoutParams(tvQuoteLayoutParams)
                 .build(this);
 
         relativeLayout.addView(imageView);
         relativeLayout.addView(tvTitle);
+        relativeLayout.addView(tvQuote);
         root.addView(relativeLayout);
         setContentView(root);
 
+//
+//        TextView tvQuote1 = findViewById(tvQuoteId);
+//        RelativeLayout.LayoutParams layoutParams =
+//                (RelativeLayout.LayoutParams) tvQuote1.getLayoutParams();
+//
+//        int i =1;
     }
 
     private int dpToPx(int dp) {

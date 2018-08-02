@@ -21,62 +21,62 @@
             android:src="@drawable/sir_max"
             tools:ignore="ContentDescription" />
 
-        <!--<TextView-->
-            <!--android:id="@+id/tvTitle"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_alignTop="@id/ivIcon"-->
-            <!--android:layout_marginLeft="8dp"-->
-            <!--android:layout_marginStart="8dp"-->
-            <!--android:layout_toEndOf="@id/ivIcon"-->
-            <!--android:layout_toRightOf="@id/ivIcon"-->
-            <!--android:text="@string/author"-->
-            <!--android:textSize="28sp"-->
-            <!--android:textStyle="bold" />-->
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/ivIcon"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_toEndOf="@id/ivIcon"
+            android:layout_toRightOf="@id/ivIcon"
+            android:text="@string/author"
+            android:textSize="28sp"
+            android:textStyle="bold" />
 
-        <!--<TextView-->
-            <!--android:id="@+id/tvQuote"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_alignBottom="@id/ivIcon"-->
-            <!--android:layout_alignLeft="@id/tvTitle"-->
-            <!--android:layout_alignStart="@id/tvTitle"-->
-            <!--android:layout_below="@+id/tvTitle"-->
-            <!--android:layout_marginTop="8dp"-->
-            <!--android:text="@string/text"-->
-            <!--android:textSize="14sp"-->
-            <!--android:textStyle="italic" />-->
+        <TextView
+            android:id="@+id/tvQuote"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/ivIcon"
+            android:layout_alignLeft="@id/tvTitle"
+            android:layout_alignStart="@id/tvTitle"
+            android:layout_below="@+id/tvTitle"
+            android:layout_marginTop="8dp"
+            android:text="@string/quote"
+            android:textSize="14sp"
+            android:textStyle="italic" />
 
 
-        <!--<EditText-->
-            <!--android:id="@+id/etComment"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_below="@id/ivIcon"-->
-            <!--android:layout_marginTop="8dp"-->
-            <!--android:hint="@string/comment"-->
-            <!--android:inputType="text"-->
-            <!--android:textSize="14sp" />-->
+        <EditText
+            android:id="@+id/etComment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ivIcon"
+            android:layout_marginTop="8dp"
+            android:hint="@string/comment"
+            android:inputType="text"
+            android:textSize="14sp" />
 
-        <!--<LinearLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_below="@id/etComment"-->
-            <!--tools:ignore="ButtonStyle">-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/etComment"
+            tools:ignore="ButtonStyle">
 
-            <!--<Button-->
-                <!--android:id="@+id/btnPrevious"-->
-                <!--android:layout_width="0dp"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_weight="1"-->
-                <!--android:text="@string/previous" />-->
-            <!--<Button-->
-                <!--android:id="@+id/btnNext"-->
-                <!--android:layout_width="0dp"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_weight="1"-->
-                <!--android:text="@string/next" />-->
-        <!--</LinearLayout>-->
+            <Button
+                android:id="@+id/btnPrevious"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/previous" />
+            <Button
+                android:id="@+id/btnNext"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/next" />
+        </LinearLayout>
 
     </RelativeLayout>
 
