@@ -98,6 +98,7 @@ public class RelativeLayoutParamsBuilder {
         return this;
     }
 
+
     public RelativeLayout.LayoutParams build() {
 
         RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(layoutWidth,

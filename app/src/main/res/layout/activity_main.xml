@@ -34,19 +34,23 @@
             android:textSize="28sp"
             android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/tvQuote"
+        <ScrollView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@id/ivIcon"
             android:layout_alignLeft="@id/tvTitle"
             android:layout_alignStart="@id/tvTitle"
             android:layout_below="@+id/tvTitle"
-            android:layout_marginTop="8dp"
-            android:text="@string/quote"
-            android:textSize="14sp"
-            android:textStyle="italic" />
+            android:layout_marginTop="8dp">
 
+            <TextView
+                android:id="@+id/tvQuote"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/quote"
+                android:textSize="14sp"
+                android:textStyle="italic" />
+        </ScrollView>
 
         <EditText
             android:id="@+id/etComment"
@@ -70,6 +74,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/previous" />
+
             <Button
                 android:id="@+id/btnNext"
                 android:layout_width="0dp"

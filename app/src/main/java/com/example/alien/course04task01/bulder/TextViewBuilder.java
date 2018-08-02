@@ -2,6 +2,7 @@ package com.example.alien.course04task01.bulder;
 
 import android.content.Context;
 import android.util.TypedValue;
+import android.view.View;
 import android.view.ViewGroup.MarginLayoutParams;
 import android.widget.TextView;
 
@@ -48,9 +49,9 @@ public class TextViewBuilder {
 
         if (id != 0) textView.setId(id);
         textView.setText(textId);
-        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSizeSp);
+        if (textSizeSp != 0) textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSizeSp);
         textView.setTypeface(textView.getTypeface(), textStyle);
-
+        textView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
         return textView;
     }
 }
