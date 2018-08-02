@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.ViewGroup.LayoutParams;
+import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
@@ -43,7 +44,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // setContentView(R.layout.activity_main);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+        //setContentView(R.layout.activity_main);
 
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
 
@@ -125,6 +127,8 @@ public class MainActivity extends AppCompatActivity {
 
     private ScrollView getScroll() {
         RelativeLayout.LayoutParams scrollLayoutParams = new RelativeLayoutParamsBuilder()
+                .setLayoutWidth(LayoutParams.WRAP_CONTENT)
+                .setLayoutHeight(LayoutParams.WRAP_CONTENT)
                 .alignBottom(IV_ICON_ID)
                 .alignLeft(TV_TITLE_ID)
                 .alignStart(TV_TITLE_ID)
@@ -139,6 +143,8 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView getTvTitle() {
         RelativeLayout.LayoutParams tvTitleLayoutParams = new RelativeLayoutParamsBuilder()
+                .setLayoutHeight(LayoutParams.WRAP_CONTENT)
+                .setLayoutWidth(LayoutParams.WRAP_CONTENT)
                 .alignTop(IV_ICON_ID)
                 .setMarginLeftPx(dpToPx(8))
                 .setMarginStartPx(dpToPx(8))
@@ -157,6 +163,9 @@ public class MainActivity extends AppCompatActivity {
     private ImageView getIvIcon() {
         return new ImageViewBulder()
                 .setId(IV_ICON_ID)
+                .setLayoutWidth(dpToPx(128))
+                .setLayoutHeight(dpToPx(192))
+                .setScaleType(ImageView.ScaleType.CENTER_CROP)
                 .setImageResource(R.drawable.sir_max)
                 .build(this);
     }
