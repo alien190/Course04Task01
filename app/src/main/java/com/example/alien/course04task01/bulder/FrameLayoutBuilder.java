@@ -62,6 +62,7 @@ public class FrameLayoutBuilder {
                 new FrameLayout.LayoutParams(layoutWidth,
                         layoutHeight);
 
+
         layout.setLayoutParams(layoutParams);
         layout.setPadding(paddingLeftPx, paddingTopPx, paddingRightPx, paddingBottomPx);
         layout.setForegroundGravity(gravity);

@@ -1,13 +1,10 @@
 package com.example.alien.course04task01;
 
 import android.graphics.Typeface;
-import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
-import android.util.TypedValue;
 import android.view.Gravity;
-import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
@@ -45,47 +42,87 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       // setContentView(R.layout.activity_main);
+        // setContentView(R.layout.activity_main);
+
+        getWindowManager().getDefaultDisplay().getMetrics(metrics);
 
 
-               getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        RelativeLayout relativeLayout = getRelativeLayout();
+        relativeLayout.addView(getIvIcon());
+        relativeLayout.addView(getTvTitle());
 
-        FrameLayout root = new FrameLayoutBuilder()
-                .setPaddingPx(dpToPx(16))
-                .setLayoutHeight(LayoutParams.MATCH_PARENT)
-                .setLayoutWidth(LayoutParams.MATCH_PARENT)
-                .setGravity(Gravity.CENTER)
-                .build(this);
+        ScrollView scrollView = getScroll();
+        scrollView.addView(getTvQuote());
+        relativeLayout.addView(scrollView);
 
-        RelativeLayout relativeLayout = new RelativeLayoutBuilder()
-                .setLayoutHeight(LayoutParams.MATCH_PARENT)
-                .setLayoutWidth(LayoutParams.MATCH_PARENT)
-                .setGravity(Gravity.CENTER)
-                .build(this);
+        relativeLayout.addView(getEtComment());
 
-        ImageView imageView = new ImageViewBulder()
-                .setId(IV_ICON_ID)
-                .setImageResource(R.drawable.sir_max)
-                .build(this);
+        LinearLayout linearLayout = getLinearLayout();
+        relativeLayout.addView(linearLayout);
+        linearLayout.addView(getButton(BTN_PREV_ID, R.string.previous));
+        linearLayout.addView(getButton(BTN_NEXT_ID, R.string.next));
 
+        FrameLayout root = getRootLayout();
+        root.addView(relativeLayout);
+        setContentView(root);
 
-        RelativeLayout.LayoutParams tvTitleLayoutParams = new RelativeLayoutParamsBuilder()
-                .alignTop(IV_ICON_ID)
-                .setMarginLeftPx(dpToPx(8))
-                .setMarginStartPx(dpToPx(8))
-                .toEndOf(IV_ICON_ID)
-                .toRightOf(IV_ICON_ID)
+    }
+
+    private Button getButton(int btnId, int textId) {
+        LinearLayout.LayoutParams btnPrevParams = new LinearLayoutParamsBuilder()
+                .setLayoutWidth(0)
+                .setLayoutHeight(LayoutParams.WRAP_CONTENT)
+                .setWeight(1)
                 .build();
-
-        TextView tvTitle = new TextViewBuilder()
-                .setId(TV_TITLE_ID)
-                .setTextId(R.string.author)
-                .setTextSizeSp(28)
-                .setTextStyle(Typeface.BOLD)
-                .setLayoutParams(tvTitleLayoutParams)
+        return new ButtonBuilder()
+                .setId(btnId)
+                .setTextId(textId)
+                .setLayoutParams(btnPrevParams)
                 .build(this);
+    }
 
+    private LinearLayout getLinearLayout() {
+        RelativeLayout.LayoutParams linearParams = new RelativeLayoutParamsBuilder()
+                .setLayoutWidth(LayoutParams.MATCH_PARENT)
+                .setLayoutHeight(LayoutParams.WRAP_CONTENT)
+                .below(ET_COMMENT_ID)
+                .build();
+        return new LinearLayoutBuilder()
+                .setLayoutParams(linearParams)
+                .build(this);
+    }
 
+    private EditText getEtComment() {
+        RelativeLayout.LayoutParams etCommentLayoutParams = new RelativeLayoutParamsBuilder()
+                .setLayoutWidth(LayoutParams.MATCH_PARENT)
+                .setLayoutHeight(LayoutParams.WRAP_CONTENT)
+                .below(IV_ICON_ID)
+                .setMarginTopPx(dpToPx(8))
+                .build();
+        return new EditTextBuilder()
+                .setHintId(R.string.comment)
+                .setId(ET_COMMENT_ID)
+                .setInputType(EditorInfo.TYPE_CLASS_TEXT)
+                .setLayoutParams(etCommentLayoutParams)
+                .setTextSizeSp(14)
+                .build(this);
+    }
+
+    private TextView getTvQuote() {
+        LinearLayout.LayoutParams tvQuoteLayoutParams = new LinearLayoutParamsBuilder()
+                .setLayoutWidth(LayoutParams.WRAP_CONTENT)
+                .setLayoutHeight(LayoutParams.WRAP_CONTENT)
+                .build();
+        return new TextViewBuilder()
+                .setId(TV_QUOTE_ID)
+                .setTextId(R.string.quote)
+                .setTextSizeSp(14)
+                .setTextStyle(Typeface.ITALIC)
+                .setLayoutParams(tvQuoteLayoutParams)
+                .build(this);
+    }
+
+    private ScrollView getScroll() {
         RelativeLayout.LayoutParams scrollLayoutParams = new RelativeLayoutParamsBuilder()
                 .alignBottom(IV_ICON_ID)
                 .alignLeft(TV_TITLE_ID)
@@ -93,146 +130,55 @@ public class MainActivity extends AppCompatActivity {
                 .below(TV_TITLE_ID)
                 .setMarginTopPx(dpToPx(8))
                 .build();
-
-        ScrollView scrollView = new ScrollViewBuilder()
+        return new ScrollViewBuilder()
                 .setId(SCROLL_ID)
                 .setLayoutParams(scrollLayoutParams)
                 .build(this);
+    }
 
-        LinearLayout.LayoutParams tvQuoteLayoutParams = new LinearLayoutParamsBuilder()
+    private TextView getTvTitle() {
+        RelativeLayout.LayoutParams tvTitleLayoutParams = new RelativeLayoutParamsBuilder()
+                .alignTop(IV_ICON_ID)
+                .setMarginLeftPx(dpToPx(8))
+                .setMarginStartPx(dpToPx(8))
+                .toEndOf(IV_ICON_ID)
+                .toRightOf(IV_ICON_ID)
+                .build();
+        return new TextViewBuilder()
+                .setId(TV_TITLE_ID)
+                .setTextId(R.string.author)
+                .setTextSizeSp(28)
+                .setTextStyle(Typeface.BOLD)
+                .setLayoutParams(tvTitleLayoutParams)
+                .build(this);
+    }
+
+    private ImageView getIvIcon() {
+        return new ImageViewBulder()
+                .setId(IV_ICON_ID)
+                .setImageResource(R.drawable.sir_max)
+                .build(this);
+    }
+
+    private RelativeLayout getRelativeLayout() {
+        return new RelativeLayoutBuilder()
+                .setLayoutHeight(LayoutParams.WRAP_CONTENT)
                 .setLayoutWidth(LayoutParams.WRAP_CONTENT)
-                .setLayoutHeight(LayoutParams.WRAP_CONTENT)
-                .build();
-
-        TextView tvQuote = new TextViewBuilder()
-                .setId(TV_QUOTE_ID)
-                .setTextId(R.string.quote)
-                .setTextSizeSp(14)
-                .setTextStyle(Typeface.ITALIC)
-                .setLayoutParams(tvQuoteLayoutParams)
+                //.setGravity(Gravity.CENTER)
                 .build(this);
+    }
 
-        RelativeLayout.LayoutParams etCommentLayoutParams = new RelativeLayoutParamsBuilder()
+    private FrameLayout getRootLayout() {
+        return new FrameLayoutBuilder()
+                .setPaddingPx(dpToPx(16))
+                .setLayoutHeight(LayoutParams.MATCH_PARENT)
                 .setLayoutWidth(LayoutParams.MATCH_PARENT)
-                .setLayoutHeight(LayoutParams.WRAP_CONTENT)
-                .below(IV_ICON_ID)
-                .setMarginTopPx(dpToPx(8))
-                .build();
-
-
-        EditText etComment = new EditTextBuilder()
-                .setHintId(R.string.comment)
-                .setId(ET_COMMENT_ID)
-                .setInputType(EditorInfo.TYPE_CLASS_TEXT)
-                .setLayoutParams(etCommentLayoutParams)
-                .setTextSizeSp(14)
+                .setGravity(Gravity.END)
                 .build(this);
-
-
-        RelativeLayout.LayoutParams linearParams = new RelativeLayoutParamsBuilder()
-                .setLayoutWidth(LayoutParams.MATCH_PARENT)
-                .setLayoutHeight(LayoutParams.WRAP_CONTENT)
-                .below(ET_COMMENT_ID)
-                .build();
-
-        LinearLayout linearLayout = new LinearLayoutBuilder()
-                .setLayoutParams(linearParams)
-                .build(this);
-
-
-        LinearLayout.LayoutParams btnPrevParams = new LinearLayoutParamsBuilder()
-                .setLayoutWidth(0)
-                .setLayoutHeight(LayoutParams.WRAP_CONTENT)
-                .setWeight(1)
-                .build();
-
-        Button btnPrev = new ButtonBuilder()
-                .setId(BTN_PREV_ID)
-                .setTextId(R.string.previous)
-                .setLayoutParams(btnPrevParams)
-                .build(this);
-
-        Button btnNext = new ButtonBuilder()
-                .setId(BTN_NEXT_ID)
-                .setTextId(R.string.next)
-                .setLayoutParams(btnPrevParams)
-                .build(this);
-
-
-        relativeLayout.addView(imageView);
-        relativeLayout.addView(tvTitle);
-        relativeLayout.addView(scrollView);
-        scrollView.addView(tvQuote);
-        relativeLayout.addView(etComment);
-        relativeLayout.addView(linearLayout);
-        linearLayout.addView(btnPrev);
-        linearLayout.addView(btnNext);
-        root.addView(relativeLayout);
-        setContentView(root);
-
-//
-//        TextView tvQuote1 = findViewById(TV_QUOTE_ID);
-//        RelativeLayout.LayoutParams layoutParams =
-//                (RelativeLayout.LayoutParams) tvQuote1.getLayoutParams();
-//
-//        int i =1;
     }
 
     private int dpToPx(int dp) {
         return Math.round(dp * metrics.density);
     }
 
-    private FrameLayout getFrameLayout(int padding) {
-        padding = dpToPx(padding);
-
-        FrameLayout layout = new FrameLayout(this);
-        FrameLayout.LayoutParams layoutParams =
-                new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                        ViewGroup.LayoutParams.MATCH_PARENT);
-
-        layout.setLayoutParams(layoutParams);
-        layout.setPadding(padding, padding, padding, padding);
-
-        return layout;
-    }
-
-    private RelativeLayout getRelativeLayout() {
-
-        RelativeLayout layout = new RelativeLayout(this);
-        RelativeLayout.LayoutParams layoutParams =
-                new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
-                        ViewGroup.LayoutParams.WRAP_CONTENT);
-        layout.setGravity(Gravity.CENTER);
-        layout.setLayoutParams(layoutParams);
-
-        return layout;
-    }
-
-    private ImageView getImageView(int ivIconId) {
-        ImageView imageView = new ImageView(this);
-        imageView.setId(ivIconId);
-        imageView.setImageResource(R.drawable.sir_max);
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(dpToPx(128), dpToPx(192));
-        imageView.setLayoutParams(layoutParams);
-        imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        return imageView;
-    }
-
-    private TextView getTextView(int id, int marginLeftDp, int marginTopDp, int marginRightDp,
-                                 int marginBottomDp, int marginStartDp, int textId, float textSizeSp, int textStyle) {
-        TextView textView = new TextView(this);
-        textView.setId(id);
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT);
-        layoutParams.setMargins(dpToPx(marginLeftDp), dpToPx(marginTopDp), dpToPx(marginRightDp), dpToPx(marginBottomDp));
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-            layoutParams.setMarginStart(dpToPx(marginStartDp));
-        }
-        textView.setLayoutParams(layoutParams);
-        textView.setText(textId);
-        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSizeSp);
-        textView.setTypeface(textView.getTypeface(), textStyle);
-
-        return textView;
-    }
 }
