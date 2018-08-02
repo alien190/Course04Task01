@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.example.alien.course04task01.bulder.ButtonBuilder;
 import com.example.alien.course04task01.bulder.EditTextBuilder;
 import com.example.alien.course04task01.bulder.FrameLayoutBuilder;
+import com.example.alien.course04task01.bulder.FrameLayoutParamsBuilder;
 import com.example.alien.course04task01.bulder.ImageViewBulder;
 import com.example.alien.course04task01.bulder.LinearLayoutBuilder;
 import com.example.alien.course04task01.bulder.LinearLayoutParamsBuilder;
@@ -161,10 +162,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private RelativeLayout getRelativeLayout() {
-        return new RelativeLayoutBuilder()
+        FrameLayout.LayoutParams layoutParams = new FrameLayoutParamsBuilder()
                 .setLayoutHeight(LayoutParams.WRAP_CONTENT)
                 .setLayoutWidth(LayoutParams.WRAP_CONTENT)
-                //.setGravity(Gravity.CENTER)
+                .setGravity(Gravity.CENTER)
+                .build();
+
+        return new RelativeLayoutBuilder()
+                .setLayoutParams(layoutParams)
                 .build(this);
     }
 
@@ -173,7 +178,6 @@ public class MainActivity extends AppCompatActivity {
                 .setPaddingPx(dpToPx(16))
                 .setLayoutHeight(LayoutParams.MATCH_PARENT)
                 .setLayoutWidth(LayoutParams.MATCH_PARENT)
-                .setGravity(Gravity.END)
                 .build(this);
     }
 
