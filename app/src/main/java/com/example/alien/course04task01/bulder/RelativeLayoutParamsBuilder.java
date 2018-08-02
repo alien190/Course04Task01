@@ -98,6 +98,10 @@ public class RelativeLayoutParamsBuilder {
         return this;
     }
 
+    public RelativeLayoutParamsBuilder above(int id) {
+        rules.add(new Rule(RelativeLayout.ABOVE, id));
+        return this;
+    }
 
     public RelativeLayout.LayoutParams build() {
 

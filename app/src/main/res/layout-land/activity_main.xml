@@ -1,6 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
 
-</android.support.constraint.ConstraintLayout>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context=".MainActivity">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        tools:ignore="UselessParent">
+
+        <ImageView
+            android:id="@+id/ivIcon"
+            android:layout_width="128dp"
+            android:layout_height="192dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/sir_max"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/ivIcon"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_toEndOf="@id/ivIcon"
+            android:layout_toRightOf="@id/ivIcon"
+            android:text="@string/author"
+            android:textSize="28sp"
+            android:textStyle="bold" />
+
+        <ScrollView
+            android:id="@+id/scroll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/etComment"
+            android:layout_alignLeft="@id/tvTitle"
+            android:layout_alignStart="@id/tvTitle"
+            android:layout_below="@+id/tvTitle"
+            android:layout_marginTop="8dp">
+
+            <TextView
+                android:id="@+id/tvQuote"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/quote"
+                android:textSize="14sp"
+                android:textStyle="italic" />
+        </ScrollView>
+
+        <EditText
+            android:id="@+id/etComment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/llComment"
+            android:layout_alignLeft="@+id/tvTitle"
+            android:layout_alignStart="@+id/tvTitle"
+            android:layout_marginTop="8dp"
+            android:hint="@string/comment"
+            android:inputType="text"
+            android:textSize="14sp" />
+
+        <LinearLayout
+            android:id="@+id/llComment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/ivIcon"
+            android:layout_alignLeft="@+id/tvTitle"
+            android:layout_alignStart="@+id/tvTitle"
+
+            tools:ignore="ButtonStyle">
+
+            <Button
+                android:id="@+id/btnPrevious"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/previous" />
+
+            <Button
+                android:id="@+id/btnNext"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/next" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</FrameLayout>

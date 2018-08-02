@@ -1,5 +1,6 @@
 package com.example.alien.course04task01;
 
+import android.content.res.Configuration;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -39,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
     private final static int BTN_PREV_ID = 10004;
     private final static int BTN_NEXT_ID = 10005;
     private final static int SCROLL_ID = 10006;
+    private static final int LLAYOUT_ID = 10007;
 
 
     @Override
@@ -48,7 +50,6 @@ public class MainActivity extends AppCompatActivity {
         //setContentView(R.layout.activity_main);
 
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
-
 
         RelativeLayout relativeLayout = getRelativeLayout();
         relativeLayout.addView(getIvIcon());
@@ -85,28 +86,45 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private LinearLayout getLinearLayout() {
-        RelativeLayout.LayoutParams linearParams = new RelativeLayoutParamsBuilder()
-                .setLayoutWidth(LayoutParams.MATCH_PARENT)
-                .setLayoutHeight(LayoutParams.WRAP_CONTENT)
-                .below(ET_COMMENT_ID)
-                .build();
+        RelativeLayoutParamsBuilder builder = new RelativeLayoutParamsBuilder();
+        builder.setLayoutWidth(LayoutParams.MATCH_PARENT)
+                .setLayoutHeight(LayoutParams.WRAP_CONTENT);
+
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+            builder.below(ET_COMMENT_ID);
+        } else {
+            builder.alignBottom(IV_ICON_ID)
+                    .alignLeft(TV_TITLE_ID)
+                    .alignStart(TV_TITLE_ID);
+
+        }
+
         return new LinearLayoutBuilder()
-                .setLayoutParams(linearParams)
+                .setId(LLAYOUT_ID)
+                .setLayoutParams(builder.build())
                 .build(this);
     }
 
     private EditText getEtComment() {
-        RelativeLayout.LayoutParams etCommentLayoutParams = new RelativeLayoutParamsBuilder()
-                .setLayoutWidth(LayoutParams.MATCH_PARENT)
+
+        RelativeLayoutParamsBuilder builder = new RelativeLayoutParamsBuilder();
+        builder.setLayoutWidth(LayoutParams.MATCH_PARENT)
                 .setLayoutHeight(LayoutParams.WRAP_CONTENT)
-                .below(IV_ICON_ID)
-                .setMarginTopPx(dpToPx(8))
-                .build();
+                .setMarginTopPx(dpToPx(8));
+
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+            builder.below(IV_ICON_ID);
+        } else {
+            builder.above(LLAYOUT_ID)
+                    .alignLeft(TV_TITLE_ID)
+                    .alignStart(TV_TITLE_ID);
+        }
+
         return new EditTextBuilder()
                 .setHintId(R.string.comment)
                 .setId(ET_COMMENT_ID)
                 .setInputType(EditorInfo.TYPE_CLASS_TEXT)
-                .setLayoutParams(etCommentLayoutParams)
+                .setLayoutParams(builder.build())
                 .setTextSizeSp(14)
                 .build(this);
     }
@@ -126,18 +144,26 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private ScrollView getScroll() {
-        RelativeLayout.LayoutParams scrollLayoutParams = new RelativeLayoutParamsBuilder()
-                .setLayoutWidth(LayoutParams.WRAP_CONTENT)
+        RelativeLayoutParamsBuilder builder = new RelativeLayoutParamsBuilder();
+        builder.setLayoutWidth(LayoutParams.WRAP_CONTENT)
                 .setLayoutHeight(LayoutParams.WRAP_CONTENT)
-                .alignBottom(IV_ICON_ID)
-                .alignLeft(TV_TITLE_ID)
-                .alignStart(TV_TITLE_ID)
-                .below(TV_TITLE_ID)
-                .setMarginTopPx(dpToPx(8))
-                .build();
+                .setMarginTopPx(dpToPx(8));
+
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+            builder.alignBottom(IV_ICON_ID)
+                    .alignLeft(TV_TITLE_ID)
+                    .alignStart(TV_TITLE_ID)
+                    .below(TV_TITLE_ID);
+        } else {
+            builder.above(ET_COMMENT_ID)
+                    .alignLeft(TV_TITLE_ID)
+                    .alignStart(TV_TITLE_ID)
+                    .below(TV_TITLE_ID);
+        }
+
         return new ScrollViewBuilder()
                 .setId(SCROLL_ID)
-                .setLayoutParams(scrollLayoutParams)
+                .setLayoutParams(builder.build())
                 .build(this);
     }
 
